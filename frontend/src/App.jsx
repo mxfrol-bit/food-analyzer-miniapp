@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import useStore from './store/useStore';
 import './App.css';
 
-// Простые компоненты для начала
 const FoodCamera = () => (
   <div className="screen">
     <h1>📸 Камера</h1>
@@ -28,9 +27,9 @@ const Profile = () => (
 
 const Navigation = () => (
   <nav className="bottom-nav">
-    <a href="/camera">📸 Камера</a>
-    <a href="/diary">📖 Дневник</a>
-    <a href="/profile">👤 Профиль</a>
+    <Link to="/camera">📸 Камера</Link>
+    <Link to="/diary">📖 Дневник</Link>
+    <Link to="/profile">👤 Профиль</Link>
   </nav>
 );
 
@@ -38,7 +37,6 @@ function App() {
   const { setUser, setInitData } = useStore();
 
   useEffect(() => {
-    // Инициализация Telegram Mini App
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
