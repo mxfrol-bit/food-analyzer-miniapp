@@ -1,4 +1,3 @@
-cat > /tmp/food-analyzer-miniapp/vercel.json << 'ENDFILE'
 {
   "version": 2,
   "builds": [
