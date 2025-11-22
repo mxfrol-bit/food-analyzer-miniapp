@@ -1,12 +1,4 @@
-Отлично! Теперь замените vercel.json:
 
-📝 ОБНОВИТЕ vercel.json на GitHub:
-1. Откройте GitHub:
-https://github.com/mxfrol-bit/food-analyzer-miniapp
-2. Найдите файл vercel.json в корне
-3. Нажмите карандаш (Edit)
-4. Замените ВЕСЬ содержимое на:
-json{
   "version": 2,
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
