@@ -1,31 +1,41 @@
-{
+Отлично! Теперь замените vercel.json:
+
+📝 ОБНОВИТЕ vercel.json на GitHub:
+1. Откройте GitHub:
+https://github.com/mxfrol-bit/food-analyzer-miniapp
+2. Найдите файл vercel.json в корне
+3. Нажмите карандаш (Edit)
+4. Замените ВЕСЬ содержимое на:
+json{
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/frontend/dist/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/dist/index.html"
-    }
-  ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "cd frontend && npm install",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/frontend/dist/index.html"
+      "destination": "/index.html"
     }
   ],
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "installCommand": "cd frontend && npm install"
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://telegram.org https://food-analyzer-api.onrender.com;"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ]
 }
+
+
+
+
+Обновите vercel.json и напишите что получилось! 🚀RetryClaude can make mistakes. Please double-check responses.Approaching weekly limitSubscribe to Max
