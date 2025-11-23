@@ -128,3 +128,501 @@ body {
   padding: 20px;
   margin-bottom: 16px;
 }
+
+/* ==================== CAMERA SCREEN ==================== */
+.mode-switch {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.mode-switch button {
+  flex: 1;
+  padding: 12px 20px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 12px;
+  color: #888;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mode-switch button.active {
+  background: #007AFF;
+  border-color: #007AFF;
+  color: white;
+}
+
+/* Upload Area */
+.upload-area {
+  background: #1a1a1a;
+  border: 2px dashed #333;
+  border-radius: 16px;
+  padding: 60px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upload-area:hover {
+  border-color: #007AFF;
+  background: #0a2540;
+}
+
+.upload-label {
+  cursor: pointer;
+  display: block;
+}
+
+.upload-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.upload-area p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.hint {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Preview */
+.preview-container {
+  margin-bottom: 20px;
+}
+
+.preview-image {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  max-height: 400px;
+  object-fit: contain;
+  background: #1a1a1a;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.action-buttons button {
+  flex: 1;
+}
+
+/* Error */
+.error-message {
+  background: #ff4444;
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Result */
+.result-container {
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.result-header h2 {
+  font-size: 20px;
+}
+
+.confidence {
+  background: #1a1a1a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #888;
+}
+
+.result-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.result-card h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.portion {
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.nutrition-item {
+  background: #0a0a0a;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.nutrition-item .label {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.nutrition-item .value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #007AFF;
+}
+
+.ingredients {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+}
+
+.ingredients h4 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: #888;
+}
+
+/* Composition Results */
+.health-score {
+  text-align: center;
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.score-bar {
+  height: 8px;
+  background: #222;
+  border-radius: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 4px;
+}
+
+.detected-text {
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.text-content {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #aaa;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.info-section {
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.info-section h4 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: #007AFF;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tag.warning {
+  background: #ff9800;
+}
+
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ingredients-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #222;
+  color: #aaa;
+}
+
+.ingredients-list li:last-child {
+  border-bottom: none;
+}
+
+.warnings {
+  background: #ff4444;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.warnings h4 {
+  margin-bottom: 12px;
+}
+
+.warning-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.warning-item:last-child {
+  border-bottom: none;
+}
+
+/* ==================== DIARY SCREEN ==================== */
+.daily-stats {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.daily-stats h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #888;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  text-align: center;
+  background: #0a0a0a;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #007AFF;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 13px;
+  color: #888;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-state p:first-child {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meal-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+}
+
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.meal-type {
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+}
+
+.meal-time {
+  font-size: 13px;
+  color: #666;
+}
+
+.meal-card h4 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.meal-nutrition {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #888;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #ff4444;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ==================== PROFILE SCREEN ==================== */
+.profile-info {
+  text-align: center;
+  padding: 40px 20px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #007AFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 16px;
+}
+
+.profile-info h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.username {
+  color: #888;
+  font-size: 15px;
+}
+
+.settings-section, .info-section {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.settings-section h3, .info-section h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #888;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #0a0a0a;
+  border-radius: 12px;
+}
+
+.setting-item .value {
+  color: #007AFF;
+  font-weight: 600;
+}
+
+.info-section p {
+  margin-bottom: 8px;
+}
+
+/* ==================== NAVIGATION ==================== */
+.bottom-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-icon {
+  font-size: 24px;
+}
+
+.nav-label {
+  font-size: 11px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nutrition-grid, .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
