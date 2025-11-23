@@ -2,7 +2,9 @@ import express from 'express';
 import { validateTelegramAuth } from '../middleware/auth.js';
 import { upload } from '../middleware/upload.js';
 import { extractTextFromImage, analyzeComposition } from '../services/ocrService.js';
+import { uploadToSupabase, deleteFromSupabase } from '../services/storageService.js';
 import supabase from '../config/database.js';
+import fs from 'fs/promises';
 
 const router = express.Router();
 
@@ -11,15 +13,32 @@ router.post('/analyze',
   validateTelegramAuth,
   upload.single('photo'),
   async (req, res) => {
+    let tempFilePath = null;
+    let supabaseFilePath = null;
+
     try {
       if (!req.file) {
         return res.status(400).json({ error: 'No image provided' });
       }
 
-      console.log('🔬 Analyzing product composition:', req.file.filename);
+      console.log('🔬 Analyzing product composition...');
+
+      // Загружаем файл в Supabase Storage
+      const { url, path } = await uploadToSupabase(
+        req.file.buffer,
+        req.file.originalname,
+        req.file.mimetype
+      );
+      
+      supabaseFilePath = path;
+      console.log('✅ File uploaded to Supabase:', url);
+
+      // Создаём временный файл для OCR
+      tempFilePath = `/tmp/${Date.now()}-${req.file.originalname}`;
+      await fs.writeFile(tempFilePath, req.file.buffer);
 
       // OCR - извлечение текста
-      const ocrResult = await extractTextFromImage(req.file.path);
+      const ocrResult = await extractTextFromImage(tempFilePath);
       
       if (!ocrResult.success) {
         return res.status(500).json({ error: 'Failed to extract text from image' });
@@ -33,7 +52,7 @@ router.post('/analyze',
         .from('composition_analysis')
         .insert({
           user_id: req.user.id,
-          photo_url: req.file.path,
+          photo_url: url, // Supabase URL
           detected_text: ocrResult.text,
           ...analysis
         })
@@ -44,6 +63,9 @@ router.post('/analyze',
         console.error('Database save error:', error);
       }
 
+      // Удаляем временный файл
+      await fs.unlink(tempFilePath).catch(() => {});
+
       console.log('✅ Composition analysis completed');
 
       res.json({
@@ -51,12 +73,25 @@ router.post('/analyze',
         data: {
           detected_text: ocrResult.text,
           ...analysis,
-          id: data?.id
+          id: data?.id,
+          image_url: url
         }
       });
     } catch (error) {
       console.error('Composition analysis error:', error);
-      res.status(500).json({ error: 'Failed to analyze composition' });
+      
+      // Очистка
+      if (tempFilePath) {
+        await fs.unlink(tempFilePath).catch(() => {});
+      }
+      if (supabaseFilePath) {
+        await deleteFromSupabase(supabaseFilePath).catch(() => {});
+      }
+
+      res.status(500).json({ 
+        error: 'Failed to analyze composition',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
     }
   }
 );
