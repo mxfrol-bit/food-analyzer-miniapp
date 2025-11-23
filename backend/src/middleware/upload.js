@@ -1,21 +1,8 @@
 import multer from 'multer';
-import path from 'path';
 import crypto from 'crypto';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../uploads/'));
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = crypto.randomBytes(8).toString('hex');
-    cb(null, `${Date.now()}-${uniqueSuffix}${path.extname(file.originalname)}`);
-  }
-});
+// Используем memory storage вместо disk storage
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
